@@ -1,0 +1,47 @@
+{% extends "bootstrap/base.html"%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} {{title}} {% endblock %}
+{% block navbar %}
+    {% if userLogin %}
+        {% include "include/navbarlogin.html" %}
+    {% else %}
+        {% include "include/navbar.html" %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container mt-2">
+        {% for message in get_flashed_messages() %}
+            <div class="col-lg-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="col-lg-4 offset-lg-4">
+            <form method="post" action="/addGrade">
+                {{ addGradeForm.hidden_tag() }}
+                <div class="mb-3">
+                    {{ addGradeForm.subject.label(class_="form-label") }}
+                    {{ addGradeForm.subject(class_="form-control") }}
+                </div>
+                <div class="form-check form-check-inline">
+                    {{ addGradeForm.term.label(class_="form-label") }}
+                    {% for term in addGradeForm.term %}
+                        {{ term }}
+                        {{ term.label(class_="pe-3") }}
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ addGradeForm.category.label(class_="form-label") }}
+                    {{ addGradeForm.category(class_="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ addGradeForm.grade.label(class_="form-label") }}
+                    {{ addGradeForm.grade(class_="form-control") }}
+                </div>
+                {{ addGradeForm.submit(class_="btn btn-secondary mt-3 float-end") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

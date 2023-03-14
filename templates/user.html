@@ -1,0 +1,14 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} {{ title }} {% endblock %}
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.locale('pl') }}
+{% endblock %}
+{% block navbar %}
+    {% include "include/navbar.html" %}
+{% endblock %}
+{% block content %}
+    <h2>Witej, {{ userName }}</h2>
+{% endblock %}

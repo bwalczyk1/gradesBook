@@ -1,0 +1,22 @@
+{% extends "bootstrap/base.html"%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} {{title}} {% endblock %}
+{% block navbar %}
+    {%  include "include/navbar.html" %}
+{% endblock %}
+{% block content %}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <form method="post" action="/login">
+                    {{ login.hidden_tag() }}
+                    {{ login.userLogin.label(class_="form-login") }}
+                    {{ login.userLogin(class_="form-control") }}
+                    {{ login.userPass.label(class_="form-login") }}
+                    {{ login.userPass(class_="form-control") }}
+                    {{ login.submit(class_="btn btn-dark mt-3 float-end") }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

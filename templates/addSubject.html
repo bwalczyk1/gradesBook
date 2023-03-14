@@ -1,0 +1,30 @@
+{% extends "bootstrap/base.html"%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %} {{title}} {% endblock %}
+{% block navbar %}
+    {% if userLogin %}
+        {% include "include/navbarlogin.html" %}
+    {% else %}
+        {% include "include/navbar.html" %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container mt-2">
+        {% for message in get_flashed_messages() %}
+            <div class="col-lg-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="col-lg-4 offset-lg-4">
+            <form method="post" action="/addSubject">
+                {{ addSubject.hidden_tag() }}
+                {{ addSubject.subject.label(class_="form-add-subject") }}
+                {{ addSubject.subject(class_="form-control") }}
+                {{ addSubject.submit(class_="btn btn-secondary mt-3 float-end") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
